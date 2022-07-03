@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section class="tasks">
+        <h2>Виконувані завдання</h2>
+        <div class="tasks__progress">
+            <div class="tasks__item">
+                <span class="btn">
+                    <i class="fa-solid fa-circle-check fa-circle-hide"></i>       
+                </span>
+            
+                <input type="text" placeholder="введіть завдання">
+
+                <span class="btn">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </span>                
+            </div>           
+        </div>
+
+        
+        <h2>Виконані завдання</h2>
+        <div class="tasks__completed">
+            <!-- <div class="tasks__item">
+                <span class="btn">
+                    <i class="fa-solid fa-circle-check"></i>
+                </span>
+               
+                <input type="text" placeholder="введіть завдання" disabled>
+                <span class="btn">
+                    <i class="fa-solid fa-circle-minus"></i>
+                </span>                
+            </div> -->
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script>
+        let todo = new TodoList();
+        todo.init();
+    </script>
+</body>
+</html>
