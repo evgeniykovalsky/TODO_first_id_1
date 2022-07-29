@@ -6,23 +6,48 @@ class TodoList {
         this.tasksProgress = this.globalWrapper.querySelector('.tasks__progress');
         this.tasksCompleted = this.globalWrapper.querySelector('.tasks__completed');
         this.tasksItem = this.globalWrapper.querySelector('.tasks__item');
-        this.allTasksList = null;
+        this.allTasksList=[];
+        
     }
 
     createOneWrap() {
        this.tasksProgress.append(this.tasksItem.cloneNode(true));
     }
+    getLocalStorage(){
+            
+        fetch('https://jsonplaceholder.typicode.com/todos')
+         .then(response => response.json())
+         .then(json =>{
+            for(let key in json){
+
+                if(json[key].userId==1){
+                this.allTasksList.push(json[key]);
+                  }
+            }
+           
+           this.createAllWrap(this.allTasksList);
+         })
+       
+
+    }
     
     createAllWrap() {
-        for (let key in this.allTasksList){
-            let taskItem = this.allTasksList[key].taskItem;
-            let status = this.allTasksList[key].status;
+
+        if(this.allTasksList.length>0){
+
+        for (let key=0;key<this.allTasksList.length;key++){
+            let taskItem = this.allTasksList[key].title;
+            let status = this.allTasksList[key].completed;
             if (status == false) {
                 this.createWrapInProgress(taskItem);
             }  else {
                 this.createWrapInCompleted(taskItem);
             }          
+        }}
+        else{
+            this.createOneWrap();
         }
+    
     }
 
     createWrapInProgress(item){
@@ -41,9 +66,7 @@ class TodoList {
         this.tasksCompleted.append(wrap);
     }
 
-    getLocalStorage(){
-        this.allTasksList = JSON.parse(localStorage.getItem('tasks'));
-    }
+   
 
     setLocalStorage() {
         localStorage.setItem('tasks', JSON.stringify(this.allTasksList));
@@ -123,11 +146,6 @@ class TodoList {
     init() {
         this.clearAllWrap();
         this.getLocalStorage();
-        if (this.allTasksList == null) {
-            this.createOneWrap();
-        } else {
-            this.createAllWrap();
-        }
         this.globalWrapper.addEventListener('click', this.eventClick.bind(this));
         this.globalWrapper.addEventListener('input', this.eventInput.bind(this));        
     }
